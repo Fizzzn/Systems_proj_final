@@ -1,7 +1,3 @@
-Generated task mix using seed 42:
-  IO tasks: 701
-  CPU tasks: 299
-
 == FIFO simulation ==
 1000 tasks, target 70% IO / 30% CPU, 8 workers, cap 100%
 
