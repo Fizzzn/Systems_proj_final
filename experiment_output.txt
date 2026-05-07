@@ -1,0 +1,43 @@
+Generated task mix using seed 42:
+  IO tasks: 701
+  CPU tasks: 299
+
+== FIFO simulation ==
+1000 tasks, target 70% IO / 30% CPU, 8 workers, cap 100%
+
+-- results --
+total runtime            : 39040 ms
+makespan                 : 39040 ms
+tasks completed          : 1000 (IO=701, CPU=299)
+avg wait time            : 9187.74 ms
+avg turnaround time      : 9387.74 ms
+max wait time            : 18880 ms (task #998)
+avg CPU usage            : 89.50 %
+avg workers active       : 5.12 / 8
+monitor samples          : 3905
+monitor csv              : monitor_fifo.csv
+
+== Optimized simulation ==
+1000 tasks, target 70% IO / 30% CPU, 8 workers, cap 100%
+
+-- results --
+total runtime            : 36320 ms
+makespan                 : 36320 ms
+tasks completed          : 1000 (IO=701, CPU=299)
+avg wait time            : 9447.62 ms
+avg wait (IO only)       : 11464.71 ms
+avg wait (CPU only)      : 4718.60 ms
+avg turnaround time      : 9647.62 ms
+max wait time            : 17340 ms (task #635)
+avg CPU usage            : 96.20 %
+avg workers active       : 5.51 / 8
+monitor samples          : 3633
+monitor csv              : monitor_optimized.csv
+
+== Comparison Summary ==
+Runtime improvement     : 2720 ms faster (6.97%)
+Average CPU usage gain  : 6.70%
+FIFO total runtime      : 39040 ms
+Optimized total runtime : 36320 ms
+FIFO avg CPU usage      : 89.50%
+Optimized avg CPU usage : 96.20%
