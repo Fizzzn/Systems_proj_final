@@ -1,6 +1,6 @@
-=======================================================================
+===============================================================
                     CPU Dispatcher Simulation
-=======================================================================
+===============================================================
 
 This project is a simulation of a task dispatcher using a CPU. It compares two scheduling strategies:
 
@@ -37,9 +37,9 @@ Simulation settings:
 | Max worker limit        || 8      |
 | CPU limit               || 100%   |
 
-=======================================================================
+===============================================================
                          Run/Build Instructions
-=======================================================================
+===============================================================
 
 Ensure that Rust and Cargo are both installed.
 
@@ -59,9 +59,9 @@ To save the printed experiment output into a text file:
 
             cargo run --quiet > experiment_output.txt
 
-=======================================================================
+===============================================================
                             Output Files
-=======================================================================
+===============================================================
 
 The system creates the following output files:
 
@@ -79,9 +79,9 @@ The CSV files contain monitor samples from each simulation, including:
 - Queue length
 - Completed task count
 
-=======================================================================
+===============================================================
                         Experiment Results
-=======================================================================
+===============================================================
 
 The main comparison is between total runtime and average CPU usage.
 
@@ -96,9 +96,9 @@ The following are the final results from one run:
 
 The optimized scheduler completed the same workload faster and used the CPU more efficiently than the FIFO scheduling strategy.
 
-=======================================================================
+===============================================================
                          Design Strategy
-=======================================================================
+===============================================================
 
 This simulation runs in 10 ms time steps.
 
@@ -114,10 +114,9 @@ The manager queue is stored using a VecDeque.
 The workers are stored as a vector of optional running tasks.
 If a worker slot is empty, then the dispatcher can assign a task to that worker.
 
-=======================================================================
+===============================================================
                          Scheduling Policy
-=======================================================================
-
+===============================================================
 The FIFO scheduler only checks the first task in the queue. If that task fits within the remaining CPU capacity, it runs. However, if it does not fit, the First In First Out scheduling system waits.
 
 The optimized scheduler checks the queue for a task that better fits the remaining CPU budget and then tries to use efficient combinations such as:
@@ -133,9 +132,9 @@ __________________
 
 This strategy helps keep the CPU usage closer to the 100% CPU cap.
 
-=======================================================================
+===============================================================
                         Synchronization Strategy
-=======================================================================
+===============================================================
 
 The manager queue, workers, and monitor are modeled inside one controlled simulation loop. This means the update order is fixed:
 
@@ -148,9 +147,9 @@ Race conditions are prevented by this fixed order in the simulation.
 
 In a real threaded version, the manager queue would need synchronization tools such as a mutex and/or a condition variable.
 
-=======================================================================
+===============================================================
                          Trade-Offs
-=======================================================================
+===============================================================
 
 A FIFO scheduling strategy is simple and fair by arrival order. However, it can leave CPU capacity unused if the front task does not fit.
 
@@ -158,9 +157,9 @@ The optimized scheduler improves CPU usage and total runtime, but it is less str
 
 This project shows the trade-off between fairness and resource utilization between both scheduling strategies.
 
-=======================================================================
+===============================================================
                          Rand and Its Use
-=======================================================================
+===============================================================
 
 This project uses the rand crate to generate random seeded tasks.
 
@@ -171,10 +170,9 @@ Each task is generated with:
 
 A fixed random seed is used so that the results are repeatable. This also makes the FIFO and Optimized comparison fair because both strategies run on the same task list.
 
-=======================================================================
+===============================================================
                           Expected Files
-=======================================================================
-
+===============================================================
 Expect these files:
 
 src/main.rs
@@ -185,10 +183,11 @@ experiment_output.txt
 monitor_fifo.csv
 monitor_optimized.csv
 CPU_Dispatcher_Design_Report.pdf
+Graph files aswell
 
-=======================================================================
+===============================================================
                           Tool Usage
-=======================================================================
+===============================================================
 
 I used the following tools to make the project as accurate as I could:
 
@@ -196,11 +195,11 @@ GitHub and GitHub Codespaces for editing, running, and managing the project.
 
 The rand crate for random task generation.
 
-AI tools like Claude and ChatGPT for debugging help, code structure, scheduler design, and README/report preparation.
+AI tools like Claude and ChatGPT for debugging help and README/report preparation.
 
-=======================================================================
+===============================================================
                           Tool Use Disclosure
-=======================================================================
+===============================================================
 
 One piece of advice that I accepted was to add a final comparison summary to the program output. This made it easier to compare results because the runtime improvement, CPU usage gain, total runtime, and average CPU usage were clearly printed.
 
